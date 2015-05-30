@@ -25,7 +25,7 @@ def load_page():
 			ind_max=[]
 			for num in maxmillion.find_all(class_="pastWinNumMM"):
 				ind_max+=[num.get_text()]
-			maxs +=[ind_max].sort()
+			maxs +=[ind_max]
 
 
 		draws+=[{"date":draw.find(class_="pastWinNumDate").get_text().strip(),"numbers":nums, "bonus":bonus[5:], "maxs":maxs}]
@@ -76,12 +76,12 @@ def has_bonus(ticket,draw):
 	return(draw['bonus'] in ticket)
 
 def check_max(ticket, draw):
-	return ticket.sort() in draw['maxs']
+	return ticket in draw['maxs']
 
-def main():
+def main(test):
 	while True:
-		draws = load_page()
-		#draws = test
+		#draws = load_page()
+		draws = test
 		draw = pick_day(draws)
 		while True:
 			ticket = input_ticket()
@@ -98,7 +98,7 @@ def main():
 			else:
 				"Also, no MMs"
 
-			if input('Check another number on the sameday? y/n:')=='n':
+			if input('Check another number on the same day? y/n:')=='n':
 				break
 
 		if input('Check another day? y/n:') == 'n':
